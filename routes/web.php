@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NhacsiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanPhamController;
 
@@ -48,3 +49,12 @@ Route::get('/san-pham', [SanPhamController::class, 'index'])->name('san-pham.ind
 
 Route::get('/san-pham/{id}', [SanPhamController::class, 'detail']);
 Route::get('/san-pham/xoa/{id}', [SanPhamController::class, 'delete']);
+
+// Nhac si
+Route::get('/nhacsi', [NhacsiController::class, 'index'])->name('nhacsi.index');
+Route::get('/nhacsi/create', [NhacsiController::class, 'create'])->name('nhacsi.create');
+Route::get('/nhacsi/{id}/edit', [NhacsiController::class, 'edit'])->name('nhacsi.edit');
+Route::get('/nhacsi/{id}/show', [NhacsiController::class, 'show'])->name('nhacsi.show');
+Route::post('/nhacsi/store', [NhacsiController::class, 'store'])->name('nhacsi.store');
+Route::put('/nhacsi/{id}/update', [NhacsiController::class, 'update'])->name('nhacsi.update');
+Route::delete('/nhacsi/{id}', [NhacsiController::class, 'destroy'])->name('nhacsi.destroy');
