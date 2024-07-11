@@ -1,14 +1,28 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>Tạo mới nhạc sĩ</h1>
+@extends('layouts.master')
 
-</body>
-</html>
+@section('title')
+    Tạo mới nhạc sĩ
+@endsection
+
+@section('content')
+    <form action="{{route('nhacsi.store')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+            <label for="" class="form-label">Tên</label>
+            <input type="text" name="ten" class="form-control">
+        </div>
+        <div class="row">
+            <label for="" class="form-label">Ảnh</label>
+            <input type="file" name="anh" class="form-control">
+        </div>
+        <div class="row">
+            <label for="" class="form-label">Ngày sinh</label>
+            <input type="date" name="ngaysinh" class="form-control">
+        </div>
+        <div class="row">
+            <label for="" class="form-label">Quê quán</label>
+            <input type="text" name="quequan" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">Tạo mới</button>
+    </form>
+@endsection
