@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\NhacsiController;
+use App\Http\Middleware\CheckAdminMiddleWare;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanPhamController;
 
@@ -18,13 +19,13 @@ use App\Http\Controllers\SanPhamController;
 // Route::method($uri, $callback);
 // method: get, post, put, patch, delete
 Route::get('/', function () {
-    // return view('welcome'); // hiển thị view
+     return view('welcome'); // hiển thị view
     // return "Hello World!"; // Hiển thị chuỗi
     // return ['phở bò', 'cơm rang'];// Hiển thị mảng
-    return response()->json([
-        'name' => 'Vũ Thị Thúy',
-        'email' => 'Thuyvt66@fpt.edu.vn'
-    ]); // Hiển thị dạng object json
+//    return response()->json([
+//        'name' => 'Vũ Thị Thúy',
+//        'email' => 'Thuyvt66@fpt.edu.vn'
+//    ]); // Hiển thị dạng object json
 })->name('welcome');
 // Route::post('/hello', function() {
 //     return 'hello';
@@ -62,3 +63,20 @@ Route::delete('/nhacsi/{id}', [NhacsiController::class, 'destroy'])->name('nhacs
 
 // Route resource
 Route::resource('books', BookController::class);
+
+// Đăng ký
+Route::get('auth/register', [\App\Http\Controllers\Auth\RegisterController::class, 'index'])
+    ->name('register');
+Route::post('auth/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])
+    ->name('register');
+
+
+//Route::get('/admin', function () {
+//    return "Đây là admin";
+//})->middleware(CheckAdminMiddleWare::class);
+//Route::get('/admin', function () {
+//    return "Đây là admin";
+//})->middleware(['author', 'isAdmin']);
+Route::get('/admin', function () {
+    return "Đây là admin";
+})->middleware('isAdmin');
