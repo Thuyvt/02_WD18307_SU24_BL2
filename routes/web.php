@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\NhacsiController;
 use App\Http\Middleware\CheckAdminMiddleWare;
@@ -65,11 +67,19 @@ Route::delete('/nhacsi/{id}', [NhacsiController::class, 'destroy'])->name('nhacs
 Route::resource('books', BookController::class);
 
 // Đăng ký
-Route::get('auth/register', [\App\Http\Controllers\Auth\RegisterController::class, 'index'])
+Route::get('auth/register', [RegisterController::class, 'index'])
     ->name('register');
-Route::post('auth/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])
+Route::post('auth/register', [RegisterController::class, 'register'])
     ->name('register');
 
+Route::get('auth/verify/{token}', [LoginController::class, 'verify'])
+    ->name('verifyEmail');
+Route::get('auth/login', [LoginController::class, 'index'])
+    ->name('login');
+Route::post('auth/login', [LoginController::class, 'login'])
+    ->name('login');
+Route::get('auth/logout', [LoginController::class, 'logout'])
+    ->name('logout');
 
 //Route::get('/admin', function () {
 //    return "Đây là admin";
